@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .navbar {
+        background: linear-gradient(135deg, #1d2c49, #14243f);
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .brand-name {
+        font-weight: 800;
+        letter-spacing: 1px;
+        margin: 0;
+    }
+
+    .brand-name .market {
+        color: #ffffff;
+    }
+
+    .brand-name .wave {
+        color: #4dd0ff;
+        text-shadow: 0 0 10px rgba(77, 208, 255, 0.6);
+    }
+</style>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <img src="{% static 'image/image.png' %}" height="100" style="margin-left: 50px;">
+        <h4 class="brand-name ms-2">
+            <span class="market">MARKET</span><span class="wave">Wave</span>
+        </h4>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'product' %}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'customer_list' %}">Customers</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'analytics' %}">Analytics</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'tag_list' %}">Tags</a>
+                </li>
+            </ul>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{% url 'logoutpage' %}" class="btn btn-sm btn-danger">
+            <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
+
+    </nav>
+</body>
+
+</html>

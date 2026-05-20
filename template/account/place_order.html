@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+
+        <div class="card shadow-sm mb-3">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">Place Order</h5>
+            </div>
+        </div>
+
+        <div class="card card-body shadow-sm">
+            <form action="" method="POST">
+                
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-info">
+                        Order Placed
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+System_design---------
+
+Customer operation
+-------------------
+1. Add Customer
+2. View customer orders
+3. View customer details
+4. Update customer
+5. Delete customer
+
+Product operation
+------------------
+1. Add product
+2. view product list
+3. view product details
+4. update product
+5. Delete product
+6. Filter by category/tags
+
+Order operation
+---------------
+1. Create orders
+2. view all orders
+3. update order status
+4. Delete Order
+
+Tags operation
+---------------
+1. Add Tags
+2. Assign tag to Product

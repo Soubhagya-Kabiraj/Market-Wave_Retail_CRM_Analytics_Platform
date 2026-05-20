@@ -1,0 +1,135 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<br>
+<style>
+	.card {
+		border-radius: 14px;
+	}
+
+	.card-header {
+		border-bottom: 1px solid #eee;
+		font-size: 0.95rem;
+	}
+
+	form input,
+	form select {
+		border-radius: 10px !important;
+		padding: 8px 12px;
+	}
+
+	form input:focus,
+	form select:focus {
+		box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, .15);
+	}
+</style>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<h5 class="text-dark"> 👤Customer:
+				<br><strong class="text-primary">{{customer.name}}</strong>
+			</h5>
+			<hr>
+			<a class="btn btn-info btn-sm mb-2 btn-block" href="{% url 'update_customer' customer.id %}">
+				<i class="bi bi-pencil-square"></i> Update Customer</a>
+
+			<a class="btn btn-danger  btn-sm btn-block" href="{% url 'delete_customer' customer.id %}">
+				<i class="bi bi-trash"></i> Remove Account</a>
+			<hr>
+			<a class="btn btn-sm btn-success btn-block" href="{% url 'place_order' customer.id %}">
+				<i class="bi bi-cart-plus"></i> Place Order</a>
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>📄Customer Information</h5>
+			<hr>
+			<p>Email: {{customer.email}}</p>
+			<p>Phone: {{customer.phone}}</p>
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>📦Total Orders</h5>
+			<hr>
+			<h1 class="fw-bold text-primary"style="text-align: center;padding: 10px">{{order_count}}</h1>
+			<small class="text-muted" style="text-align: center;">Orders placed</small>
+		</div>
+	</div>
+</div>
+
+
+<br>
+<div class="row mb-4">
+	<div class="col">
+		<div class="card shadow-sm border-0">
+			<div class="card-header bg-white fw-semibold">
+				🔍 Filter Orders
+			</div>
+
+			<div class="card-body">
+				<form method="get" class="row g-3 align-items-end">
+
+					{% for field in myFilter.form %}
+					<div class="col-md-3">
+						<label class="form-label small text-muted">
+							{{ field.label }}
+						</label>
+						{{ field }}
+					</div>
+					{% endfor %}
+
+					<div class="col-md-2 d-grid">
+						<button class="btn btn-primary">
+							<i class="bi bi-search"></i> Search
+						</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<br>
+
+<div class="row" style="font-size: 14px; text-align: center;">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Product</th>
+					<th>Category</th>
+					<th>Date Orderd</th>
+					<th>Status</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+				{% for order in orders %}
+
+				<tr>
+					<td>{{order.Product}}</td>
+					<td>{{order.Product.category}}</td>
+					<td>{{order.date_created}}</td>
+					<td>{{order.status}}</td>
+					<td>
+						<a class="btn btn-sm btn-primary" href="{% url 'updateorder' order.id %}">
+							<i class="bi bi-pencil-square"></i>
+						</a>
+					</td>
+					<td><a class="btn btn-sm btn-danger" href="">
+						<i class="bi bi-trash"></i>
+					</a></td>
+				</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

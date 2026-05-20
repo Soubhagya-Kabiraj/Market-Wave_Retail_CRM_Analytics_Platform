@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<br>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <!-- Header Card -->
+            <div class="card tag-header shadow-sm border-0 mb-4">
+                <div class="card-body d-flex align-items-center justify-content-between">
+
+                    <!-- Left: Title -->
+                    <div>
+                        <h4 class="fw-bold mb-1 d-flex align-items-center gap-2">
+                            <i class="bi bi-tags text-primary"></i> Tag List
+                        </h4>
+                        <small class="text-muted">All available product tags</small>
+                    </div>
+
+                    <!-- Right: Action -->
+                    <a href="{% url 'import_csv' %}"
+                        class="btn btn-sm btn-outline-primary d-flex align-items-center gap-1 px-3 rounded-3">
+                        <i class="bi bi-upload"></i> Import Tag
+                    </a>
+                </div>
+            </div>
+
+            <!-- Table Card -->
+            <div class="card shadow-sm">
+                <div class="card-body p-0">
+                    <table class="table table-hover mb-0 text-center">
+                        <thead class="table table-primary">
+                            <tr>
+                                <th>ID</th>
+                                <th>Tag Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in tag %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>
+                                    <span class="badge bg-success px-3 py-2">
+                                        {{ i.name }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="2" class="text-muted py-4">
+                                    No tags found
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

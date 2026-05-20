@@ -1,0 +1,60 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container d-flex justify-content-center mt-4">
+    <div class="card shadow-sm" style="width: 22rem;">
+        <div class="card-body">
+
+            <div class="update-header" style="background: linear-gradient(135deg, #525d71, #314d7d);
+                color: white;
+                border-radius: 5px 5px 5px 5px;
+                padding: 2px;
+                text-align: center;">
+                <small>CUSTOMER</small>
+                <h5 class="fw-bold">{{ order.customer.name }}</h5>
+            </div>
+            <div class="text-center mb-3">
+                <span class="badge bg-light text-dark border">
+                    Order #{{ order.id }}
+                </span>
+            </div>
+            {% if order.Product.pic %}
+            <div class="text-center mb-3">
+                <img src="{{ order.Product.pic.url }}" alt="{{ order.Product.name }}" class="img-fluid rounded"
+                    style="max-height:160px; object-fit:contain;">
+            </div>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <!-- Product -->
+                <div class="mb-3">
+                    <label class="form-label">Product</label>
+                    {{ form.Product }}
+                </div>
+
+                <!-- Status -->
+                <div class="mb-4">
+                    <label class="form-label">Order Status</label>
+                    {{ form.status }}
+                </div>
+
+                <!-- Actions -->
+                <div class="d-flex justify-content-between action-btns">
+                    <a href="{% url 'home' %}" class="btn btn-outline-secondary">
+                        Back
+                    </a>
+                    <button type="submit" class="btn btn-success">
+                        Update
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

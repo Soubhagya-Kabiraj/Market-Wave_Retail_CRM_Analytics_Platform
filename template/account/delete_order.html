@@ -1,0 +1,58 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+
+<div class="container d-flex justify-content-center mt-4">
+    <div class="card delete-order-card" style="width: 22rem;">
+        <div class="card-body text-center">
+
+            <!-- Customer Info -->
+            <div class="update-header" style="background: linear-gradient(135deg, #525d71, #314d7d);
+                color: white;
+                border-radius: 5px 5px 5px 5px;
+                padding: 2px;
+                text-align: center;">
+                <small>CUSTOMER</small>
+                <h5 class="fw-bold">{{ order.customer.name }}</h5>
+            </div>
+            <div class="text-center mb-3">
+                <span class="badge bg-light text-dark border">
+                    Order #{{ order.id }}
+                </span>
+            </div>
+
+            <!-- Product Image -->
+            {% if order.Product.pic %}
+            <div class="text-center mb-3">
+                <img src="{{ order.Product.pic.url }}" alt="{{ order.Product.name }}"
+                style="max-height:160px; object-fit:contain;">
+            </div>
+            {% endif %}
+
+            <!-- Confirmation Text -->
+            <p class="mb-4">
+                Are you sure you want to delete the order of  
+                <strong>{{ order.Product.name }}</strong>  
+                for this customer?
+            </p>
+
+            <!-- Actions -->
+            <form action="{% url 'deleteorder' order.id %}" method="POST">
+                {% csrf_token %}
+
+                <a href="{% url 'home' %}" class="btn btn-outline-secondary me-2">
+                    Cancel
+                </a>
+
+                <button type="submit" class="btn btn-danger">
+                    Delete Order
+                </button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

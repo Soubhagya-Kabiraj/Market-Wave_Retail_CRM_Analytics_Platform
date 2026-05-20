@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+
+<div class="container d-flex justify-content-center">
+    <div class="card shadow-sm" style="width: 28rem;">
+        <div class="card-body text-center">
+
+            <h5 class="card-title text-danger mb-3">
+                Confirm Delete
+            </h5>
+
+            <p class="card-text">
+                Are you sure you want to delete
+                <strong>{{ customer.name }}</strong>?
+            </p>
+
+            <form action="{% url 'delete_customer' customer.id %}" method="POST" class="mt-4">
+                {% csrf_token %}
+
+                <a class="btn btn-outline-secondary me-2" href="{% url 'home' %}">
+                    Cancel
+                </a>
+
+                <button type="submit" class="btn btn-danger">
+                    Delete
+                </button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

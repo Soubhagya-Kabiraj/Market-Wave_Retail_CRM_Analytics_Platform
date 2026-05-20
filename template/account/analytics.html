@@ -1,0 +1,151 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-4">
+    <div class="card card-body">
+        <h5 class="fw-bold">Analytics Overview</h5>
+    </div>
+    <hr>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="analytics-card">
+                <h6>Status Bar</h6>
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="analytics-card">
+                <h6>Status Doughnut</h6>
+                <canvas id="doughnutChart"></canvas>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="analytics-card">
+                <h6>Orders Per Day</h6>
+                <canvas id="ordersBarChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row g-4 mt-1">
+        <div class="col-md-4">
+            <div class="analytics-card">
+                <h6>Status Pie</h6>
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="analytics-card">
+                <h6>Orders Line</h6>
+                <canvas id="lineChart"></canvas>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="analytics-card">
+                <h6>Orders Area</h6>
+                <canvas id="areaChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script id="status-data" type="application/json">
+  {{ status_data|safe }}
+</script>
+
+<script id="orders-data" type="application/json">
+  {{ orders_per_day|safe }}
+</script>
+
+<script>
+    const statusData = JSON.parse(document.getElementById('status-data').textContent);
+    const ordersData = JSON.parse(document.getElementById('orders-data').textContent);
+
+    const statusLabels = statusData.map(x => x.status);
+    const statusCounts = statusData.map(x => x.count);
+
+    const orderDates = ordersData.map(x => x.date);
+    const orderCounts = ordersData.map(x => x.count);
+
+    const commonOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { position: 'top' } }
+    };
+
+    /* STATUS BAR */
+    new Chart(barChart, {
+        type: 'bar',
+        data: {
+            labels: statusLabels,
+            datasets: [{ label: 'Orders', data: statusCounts }]
+        },
+        options: commonOptions
+    });
+
+    /* STATUS DOUGHNUT */
+    new Chart(doughnutChart, {
+        type: 'doughnut',
+        data: {
+            labels: statusLabels,
+            datasets: [{ data: statusCounts }]
+        },
+        options: commonOptions
+    });
+
+    /* ORDERS BAR */
+    new Chart(ordersBarChart, {
+        type: 'bar',
+        data: {
+            labels: orderDates,
+            datasets: [{ label: 'Orders', data: orderCounts }]
+        },
+        options: commonOptions
+    });
+
+    /* STATUS PIE */
+    new Chart(pieChart, {
+        type: 'pie',
+        data: {
+            labels: statusLabels,
+            datasets: [{ data: statusCounts }]
+        },
+        options: commonOptions
+    });
+
+    /* ORDERS LINE */
+    new Chart(lineChart, {
+        type: 'line',
+        data: {
+            labels: orderDates,
+            datasets: [{ label: 'Orders', data: orderCounts, tension: 0.4 }]
+        },
+        options: commonOptions
+    });
+
+    /* ORDERS AREA */
+    new Chart(areaChart, {
+        type: 'line',
+        data: {
+            labels: orderDates,
+            datasets: [{
+                label: 'Orders',
+                data: orderCounts,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: commonOptions
+    });
+
+
+</script>
+
+{% endblock %}

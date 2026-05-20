@@ -1,0 +1,73 @@
+{% block content %}
+<br>
+<!-- <div class="card card-body p-4 rounded-4 mb-3"
+     style="background: linear-gradient(135deg, #1d2b64, #3f5efb);">
+    <div class="d-flex align-items-center justify-content-between text-white">
+        <div>
+            <h6 class="opacity-75 mb-1">Welcome back 👋</h6>
+            <h3 class="fw-bold mb-0">{{ request.user.username }}</h3>
+        </div>
+        <div class="rounded-circle bg-white bg-opacity-25 d-flex align-items-center justify-content-center"
+             style="width:52px;height:52px;">
+            <i class="bi bi-person-fill fs-4"></i>
+        </div>
+    </div>
+</div> -->
+
+<div class="card card-body"><h5 class="fw-bold">Order Overview</h5></div>
+<br>
+<div class="row">
+    <div class="col">
+        <div class="col-md">
+            <a href="{% url 'order_list' %}" class="text-decoration-none">
+                <div class="card text-center text-white mb-3" id="total-orders">
+                    <div class="card-header">
+                        <h5 class="card-title">Total Orders</h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">{{ total_order }}</h3>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col">
+        <div class="col-md">
+            <div class="card text-center text-white mb-3" id="orders-delivered">
+                <div class="card-header">
+                    <h5 class="card-title">Orders Delivered</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{ delivered }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="col-md">
+            <div class="card text-center text-white mb-3" id="orders-pending">
+                <div class="card-header">
+                    <h5 class="card-title">Orders Pending</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{ pending }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="col-md">
+            <div class="card text-center text-white mb-3" id="out_for_delivery">
+                <div class="card-header">
+                    <h5 class="card-title">Out For Delivery</h5>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{ out_for_delivery }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
